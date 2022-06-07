@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import UserProfile from "./UserProfile";
 import axios from "axios";
+import UserSkill from "./UserSkill";
+import MasterSkill from "./MasterSkill";
+import MasterSkillLevel from "./MasterSkillLevel";
+
 export default function Home() {
 	const [user, setUser] = useState({});
 	const [menu, setMenu] = useState("");
@@ -42,6 +45,14 @@ export default function Home() {
 						<div className="navigation-submenu">
 							<span
 								className="navigation-link"
+								onClick={() => setMenu("user-skill")}
+							>
+								User Skill
+							</span>
+						</div>
+						<div className="navigation-submenu">
+							<span
+								className="navigation-link"
 								onClick={() =>
 									showSubMenu === false
 										? setShowSubMenu(true)
@@ -56,30 +67,43 @@ export default function Home() {
 						<h4 style={{ padding: "0px 20px", color: "#AEAEAE" }}>
 							{username}
 						</h4>
-						<button>Logout</button>
+						<button
+							onClick={() => {
+								localStorage.clear();
+								window.location.href = "/auth/login";
+							}}
+						>
+							Logout
+						</button>
 					</div>
 				</nav>
 				{showSubMenu ? (
 					<div className="navigation-submenu-master">
-						<Link
+						<span
 							className="navigation-submenu-master-link-skill"
-							style={{ textDecoration: "none" }}
-							to="/skills"
+							onClick={() => setMenu("master-skill")}
 						>
-							<span>Skill</span>
-						</Link>
-						<Link
+							Skill
+						</span>
+						<span
 							className="navigation-submenu-master-link-skill-level"
-							style={{ textDecoration: "none" }}
-							to="/skill-level"
+							onClick={() => setMenu("master-skill-level")}
 						>
-							<span>Skill Level</span>
-						</Link>
+							Skill Level
+						</span>
 					</div>
 				) : null}
 			</header>
 
-			{menu === "profile" ? <UserProfile id={id} user={user} /> : null}
+			{menu === "profile" ? (
+				<UserProfile id={id} user={user} />
+			) : menu === "user-skill" ? (
+				<UserSkill />
+			) : menu === "master-skill" ? (
+				<MasterSkill />
+			) : menu === "master-skill-level" ? (
+				<MasterSkillLevel />
+			) : null}
 		</>
 	);
 }

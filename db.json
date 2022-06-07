@@ -13,14 +13,26 @@
   ],
   "skills": [
     {
-      "skillId": 1,
-      "skillName": "so"
+      "skillName": "Skill B",
+      "id": 2
     }
   ],
-  "skillLevel": [
+  "skillLevel": [],
+  "userSkill": [
     {
-      "skillLevelId": 1,
-      "skillLevelName": ""
+      "id": 2,
+      "userSkillName": "Skill A",
+      "userSkillLevel": "Medium"
+    },
+    {
+      "id": 3,
+      "userSkillName": "Skill C",
+      "userSkillLevel": "Intermediate"
+    },
+    {
+      "id": 4,
+      "userSkillName": "Skill C",
+      "userSkillLevel": "Intermediate"
     }
   ],
   "profile": [

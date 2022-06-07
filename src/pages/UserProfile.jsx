@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 export default function UserProfile({ id, user }) {
 	const [formProfile, setFormProfile] = useState({
 		name: user.name,
@@ -26,53 +26,59 @@ export default function UserProfile({ id, user }) {
 	console.log(user);
 	return (
 		<section>
-			<hr />
-			<form onSubmit={updateProfile}>
-				<div>
-					<label htmlFor="name">Name</label>
-					<input
-						onChange={onChangeInput}
-						type="text"
-						name="name"
-						id="name"
-						value={formProfile.name}
-					/>
-				</div>
-				<div>
-					<label htmlFor="address">Address</label>
-					<textarea
-						onChange={onChangeInput}
-						name="address"
-						id="address"
-						value={formProfile.address}
-						cols="30"
-						rows="5"
-					></textarea>
-				</div>
-				<div>
-					<label htmlFor="bod">Birth Of Date</label>
-					<input
-						value={formProfile.bod}
-						onChange={onChangeInput}
-						type="date"
-						name="bod"
-						id="bod"
-					/>
-				</div>
-				<div>
-					<label htmlFor="email">Email</label>
-					<input
-						value={formProfile.email}
-						onChange={onChangeInput}
-						type="email"
-						name="email"
-						id="email"
-					/>
-				</div>
-				<div>
-					<button>Update Profile</button>
-				</div>
-			</form>
+			<section className="userprofile__main">
+				<h2>User Profile</h2>
+				<form className="form__userprofile" onSubmit={updateProfile}>
+					<div className="form__userprofile_group">
+						<label htmlFor="name">Name</label>
+						<input
+							onChange={onChangeInput}
+							className="form__userprofile_control"
+							type="text"
+							name="name"
+							id="name"
+							value={formProfile.name}
+						/>
+					</div>
+					<div className="form__userprofile_group">
+						<label htmlFor="address">Address</label>
+						<textarea
+							onChange={onChangeInput}
+							className="form__userprofile_control"
+							name="address"
+							id="address"
+							value={formProfile.address}
+							cols="30"
+							rows="5"
+						></textarea>
+					</div>
+					<div className="form__userprofile_group">
+						<label htmlFor="bod">Birth Of Date</label>
+						<input
+							value={formProfile.bod}
+							onChange={onChangeInput}
+							className="form__userprofile_control"
+							type="date"
+							name="bod"
+							id="bod"
+						/>
+					</div>
+					<div className="form__userprofile_group">
+						<label htmlFor="email">Email</label>
+						<input
+							value={formProfile.email}
+							onChange={onChangeInput}
+							className="form__userprofile_control"
+							type="email"
+							name="email"
+							id="email"
+						/>
+					</div>
+					<div className="form__userprofile_group">
+						<button className="button">Update Profile</button>
+					</div>
+				</form>
+			</section>
 		</section>
 	);
 }
