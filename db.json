@@ -4,6 +4,11 @@
       "id": 1,
       "username": "rino",
       "password": "123456"
+    },
+    {
+      "id": 2,
+      "username": "riyaraa new",
+      "password": "123"
     }
   ],
   "skills": [
@@ -28,13 +33,12 @@
       "email": "rino@gmail.com"
     },
     {
-      "id": 2,
-      "username": "aw",
-      "name": "aw",
-      "address": "aw",
-      "password": "1234",
+      "name": "rino baru ajah deh awa",
+      "address": "jalan jalan",
       "bod": "2022-06-08",
-      "email": "rinosdc@gmail.com"
+      "email": "rinonew@gmail.com",
+      "username": "riyaraa new",
+      "id": 2
     }
   ]
 }

@@ -17,7 +17,7 @@ export default function Login() {
 				password,
 			});
 			const findUserIsSame = response.data.find((value) => {
-				return value.username === username || value.password === password;
+				return value.username === username && value.password === password;
 			});
 
 			if (findUserIsSame === undefined) {
@@ -26,10 +26,12 @@ export default function Login() {
 				setMessage("Akun tidak ditemukan");
 				return false;
 			} else {
+				localStorage.setItem("username", findUserIsSame.username);
+				localStorage.setItem("user_id", findUserIsSame.id);
 				setError("false");
 				alert("Berhasil Login!");
 				setTimeout(() => {
-					history.push("/home");
+					history.push("/");
 				}, []);
 			}
 		} catch (error) {

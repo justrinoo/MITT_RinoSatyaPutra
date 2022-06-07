@@ -34,3 +34,62 @@
 	color: #037efc;
 	border: none;
 }
+.navigation {
+	padding: 0px 32px;
+	display: flex;
+	justify-content: space-between;
+	background-color: #e2f2ff;
+	align-items: center;
+}
+.navigation__menu {
+	display: flex;
+	align-items: center;
+}
+.navigation-submenu {
+	margin: 0px 12px;
+}
+.navigation-submenu {
+	position: relative;
+	margin: 0px 12px;
+}
+.navigation-link {
+	text-decoration: none;
+	background-color: #2c944a;
+	color: white;
+	padding: 8px 18px;
+	border-radius: 4px;
+	cursor: pointer;
+}
+.navigation-submenu-master {
+	border-radius: 4px;
+	border: 1px solid #dedede;
+	display: flex;
+	flex-direction: column;
+	width: 10%;
+	position: absolute;
+	left: 290px;
+}
+.navigation-submenu-master span {
+	padding: 8px;
+}
+.navigation-submenu-master-link-skill {
+	padding: 8px;
+	color: #000;
+}
+.navigation-submenu-master-link-skill-level {
+	padding: 8px;
+	color: #000;
+}
+.navigation-submenu-master-link-skill:hover {
+	background-color: #037efc;
+	color: white !important;
+	cursor: pointer;
+}
+.navigation-submenu-master-link-skill-level:hover {
+	background-color: #037efc;
+	color: white !important;
+	cursor: pointer;
+}
+.navigation__username {
+	margin: 0px 20px;
+}

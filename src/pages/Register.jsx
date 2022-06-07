@@ -19,6 +19,10 @@ export default function Register() {
 		event.preventDefault();
 		try {
 			for (let id = 0; id < 1; id++) {
+				await axios.post("http://localhost:3000/login", {
+					username: username,
+					password: "123",
+				});
 				await axios.post("http://localhost:3000/profile", {
 					id: id,
 					username: username,
@@ -28,6 +32,13 @@ export default function Register() {
 					bod: bod,
 					email: email,
 				});
+				setUsername("");
+				setEmail("");
+				setAddress("");
+				setBod("");
+				setName("");
+				setPassword("");
+				alert("Registrasi Berhasil!");
 				return history.push("/auth/login");
 			}
 		} catch (error) {
@@ -45,6 +56,7 @@ export default function Register() {
 						<input
 							className="input__form"
 							type="text"
+							value={username}
 							name="username"
 							id="username"
 							placeholder="Username"
@@ -56,6 +68,7 @@ export default function Register() {
 						<input
 							className="input__form"
 							type="text"
+							value={name}
 							name="name"
 							id="name"
 							placeholder="Name"
@@ -67,6 +80,7 @@ export default function Register() {
 						<input
 							className="input__form"
 							type="text"
+							value={address}
 							name="address"
 							id="address"
 							placeholder="Name"
@@ -89,6 +103,7 @@ export default function Register() {
 						<input
 							className="input__form"
 							type="email"
+							value={email}
 							name="email"
 							id="email"
 							placeholder="Username"
@@ -99,7 +114,8 @@ export default function Register() {
 						<label htmlFor="password">Password</label>
 						<input
 							className="input__form"
-							type="text"
+							type="password"
+							value={password}
 							name="password"
 							id="password"
 							placeholder="Username"

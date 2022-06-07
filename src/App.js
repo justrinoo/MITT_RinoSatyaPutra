@@ -9,10 +9,10 @@ function App() {
 			<Route exact path="/auth/login" component={Login} />
 
 			<Route exact path="/auth/register" component={Register} />
-			<Route exact path="/home" component={Home} />
-			<Route exact path="/profile" />
-			<Route exact path="/skill" />
-			<Route exact path="/master-skill" />
+			<Route exact path="/" component={Home} />
+			{/* <Route exact path="/profile" /> */}
+			{/* <Route exact path="/skill" />/ */}
+			{/* <Route exact path="/master-skill" /> */}
 		</Router>
 	);
 }
