@@ -3,15 +3,27 @@ import React, { useEffect, useState } from "react";
 
 export default function UserSkill() {
 	const [userSkils, setUserSkills] = useState([]);
+	const [getUserName, setGetUserName] = useState([]);
+	const [getUserLevel, setGetUserLevel] = useState([]);
 	const [tempId, setTempId] = useState();
 	const [showCreateSkill, setShowCreateSkill] = useState(false);
 	const [showEditSkill, setShowEditSkill] = useState(false);
 
+	async function getUserSkill() {
+		const response = await axios.get("http://localhost:3000/userSkill");
+		setUserSkills(response.data);
+	}
+	async function getUserSkillName() {
+		const response = await axios.get("http://localhost:3000/skills");
+		setGetUserName(response.data);
+	}
+	async function getUserSkilLevel() {
+		const response = await axios.get("http://localhost:3000/skillLevel");
+		setGetUserLevel(response.data);
+	}
 	useEffect(() => {
-		async function getUserSkill() {
-			const response = await axios.get("http://localhost:3000/userSkill");
-			setUserSkills(response.data);
-		}
+		getUserSkilLevel();
+		getUserSkillName();
 		getUserSkill();
 	}, []);
 	return (
@@ -48,7 +60,8 @@ export default function UserSkill() {
 											`http://localhost:3000/userSkill/${value.id}`
 										);
 										alert("Berhasil menghapus user skill");
-										window.location.reload();
+										// window.location.reload();
+										getUserSkill();
 									}}
 								>
 									Delete
@@ -58,13 +71,26 @@ export default function UserSkill() {
 					))}
 				</tbody>
 			</table>
-			{showCreateSkill ? <CreateSkill /> : null}
-			{showEditSkill ? <EditSkill id={tempId} /> : null}
+			{showCreateSkill ? (
+				<CreateSkill
+					getUserName={getUserName}
+					getUserLevel={getUserLevel}
+					getUserSkill={getUserSkill}
+				/>
+			) : null}
+			{showEditSkill ? (
+				<EditSkill
+					id={tempId}
+					getUserName={getUserName}
+					getUserLevel={getUserLevel}
+					getUserSkill={getUserSkill}
+				/>
+			) : null}
 		</div>
 	);
 }
 
-function CreateSkill() {
+function CreateSkill({ getUserName, getUserLevel, getUserSkill }) {
 	const [userSkillName, setUserSkillName] = useState("");
 	const [userSkillLevel, setUserSkillLevel] = useState("");
 
@@ -78,7 +104,8 @@ function CreateSkill() {
 			});
 			await axios.get("http://localhost:3000/userSkill");
 			alert("Berhasil menambahkan User Skill");
-			window.location.reload();
+			// window.location.reload();
+			getUserSkill();
 		}
 	};
 
@@ -94,10 +121,11 @@ function CreateSkill() {
 						id="userSkillName"
 					>
 						<option hidden>Choose{"{ Skill }"}</option>
-						<option value="Skill A">SKill A</option>
-						<option value="Skill B">SKill B</option>
-						<option value="Skill C">SKill C</option>
-						<option value="Skill D">SKill D</option>
+						{getUserName.map((value, idx) => (
+							<option value={value.skillName} key={idx}>
+								{value.skillName}
+							</option>
+						))}
 					</select>
 				</div>
 				<div>
@@ -108,10 +136,11 @@ function CreateSkill() {
 						id="userSkillLevel"
 					>
 						<option hidden>Choose{"{ SkillLevel }"}</option>
-						<option value="Beginner">Beginner</option>
-						<option value="Medium">Medium</option>
-						<option value="Intermediate">Intermediate</option>
-						<option value="Advance">Advance</option>
+						{getUserLevel.map((value, idx) => (
+							<option value={value.skillName} key={idx}>
+								{value.skillName}
+							</option>
+						))}
 					</select>
 				</div>
 				<button type="submit">Add</button>
@@ -119,20 +148,24 @@ function CreateSkill() {
 		</>
 	);
 }
-function EditSkill({ id }) {
+
+function EditSkill({ id, getUserSkill, getUserName, getUserLevel }) {
 	const [detailSkill, setDetailSkill] = useState({});
-	const [userSkillName, setUserSkillName] = useState("");
-	const [userSkillLevel, setUserSkillLevel] = useState("");
+	const [userSkillName, setUserSkillName] = useState(detailSkill.userSkillName);
+	const [userSkillLevel, setUserSkillLevel] = useState(
+		detailSkill.userSkillLevel
+	);
 
 	const EditFormSkill = async (event) => {
 		event.preventDefault();
-		const response = await axios.put(`http://localhost:3000/userSkill/${id}`, {
+		await axios.put(`http://localhost:3000/userSkill/${id}`, {
 			userSkillName,
 			userSkillLevel,
 		});
 		await axios.get("http://localhost:3000/userSkill");
 		alert("Berhasil Mengubah User Skill");
-		window.location.reload();
+		// window.location.reload();
+		getUserSkill();
 	};
 
 	useEffect(() => {
@@ -152,12 +185,16 @@ function EditSkill({ id }) {
 						onChange={(event) => setUserSkillName(event.target.value)}
 						name="userSkillName"
 						id="userSkillName"
+						value={userSkillName}
 					>
 						<option hidden>{detailSkill.userSkillName}</option>
-						<option value="Skill A">SKill A</option>
-						<option value="Skill B">SKill B</option>
-						<option value="Skill C">SKill C</option>
-						<option value="Skill D">SKill D</option>
+						{getUserName.map((value, idx) => {
+							return (
+								<option value={value.skillName} key={idx}>
+									{value.skillName}
+								</option>
+							);
+						})}
 					</select>
 				</div>
 				<div>
@@ -166,12 +203,16 @@ function EditSkill({ id }) {
 						onChange={(event) => setUserSkillLevel(event.target.value)}
 						name="userSkillLevel"
 						id="userSkillLevel"
+						value={userSkillLevel}
 					>
 						<option hidden>{detailSkill.userSkillLevel}</option>
-						<option value="Beginner">Beginner</option>
-						<option value="Medium">Medium</option>
-						<option value="Intermediate">Intermediate</option>
-						<option value="Advance">Advance</option>
+						{getUserLevel.map((value, idx) => {
+							return (
+								<option value={value.skillName} key={idx}>
+									{value.skillName}
+								</option>
+							);
+						})}
 					</select>
 				</div>
 				<button type="submit">Edit</button>

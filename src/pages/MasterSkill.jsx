@@ -7,11 +7,11 @@ export default function MasterSkill() {
 	const [showCreateSkill, setShowCreateSkill] = useState(false);
 	const [showEditSkill, setShowEditSkill] = useState(false);
 
+	async function getskills() {
+		const response = await axios.get("http://localhost:3000/skills");
+		setMasterSkills(response.data);
+	}
 	useEffect(() => {
-		async function getskills() {
-			const response = await axios.get("http://localhost:3000/skills");
-			setMasterSkills(response.data);
-		}
 		getskills();
 	}, []);
 	return (
@@ -49,6 +49,7 @@ export default function MasterSkill() {
 										);
 										alert("Berhasil menghapus Master Skill");
 										window.location.reload();
+										getskills();
 									}}
 								>
 									Delete
@@ -58,13 +59,13 @@ export default function MasterSkill() {
 					))}
 				</tbody>
 			</table>
-			{showCreateSkill ? <CreateSkill /> : null}
-			{showEditSkill ? <EditSkill id={tempId} /> : null}
+			{showCreateSkill ? <CreateSkill getskills={getskills} /> : null}
+			{showEditSkill ? <EditSkill id={tempId} getskills={getskills} /> : null}
 		</div>
 	);
 }
 
-function CreateSkill() {
+function CreateSkill({ getskills }) {
 	const [masterSkillName, setMasterSkillName] = useState("");
 
 	const createFormSkill = async (event) => {
@@ -76,7 +77,8 @@ function CreateSkill() {
 			});
 			await axios.get("http://localhost:3000/skills");
 			alert("Berhasil menambahkan Master Skill");
-			window.location.reload();
+			// window.location.reload();
+			getskills();
 		}
 	};
 
@@ -99,7 +101,7 @@ function CreateSkill() {
 		</>
 	);
 }
-function EditSkill({ id }) {
+function EditSkill({ id, getskills }) {
 	const [detailSkill, setDetailSkill] = useState({});
 	const [masterSkillName, setMasterSkillName] = useState("");
 	const EditFormSkill = async (event) => {
@@ -109,7 +111,8 @@ function EditSkill({ id }) {
 		});
 		await axios.get("http://localhost:3000/skills");
 		alert("Berhasil Mengubah Master Skill");
-		window.location.reload();
+		// window.location.reload();
+		getskills();
 	};
 
 	useEffect(() => {

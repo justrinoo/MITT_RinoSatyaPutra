@@ -9,30 +9,47 @@
       "id": 2,
       "username": "riyaraa new",
       "password": "123"
+    },
+    {
+      "username": "Jun",
+      "password": "123",
+      "id": 3
     }
   ],
   "skills": [
     {
-      "skillName": "Skill B",
+      "id": 1,
+      "skillName": "Python"
+    },
+    {
+      "skillName": "PHP",
       "id": 2
     }
   ],
-  "skillLevel": [],
-  "userSkill": [
+  "skillLevel": [
+    {
+      "id": 1,
+      "skillName": "Beginner"
+    },
     {
       "id": 2,
-      "userSkillName": "Skill A",
-      "userSkillLevel": "Medium"
+      "skillName": "Pemula"
     },
     {
       "id": 3,
-      "userSkillName": "Skill C",
-      "userSkillLevel": "Intermediate"
+      "skillName": "Baru"
+    }
+  ],
+  "userSkill": [
+    {
+      "id": 1,
+      "userSkillName": "Python",
+      "userSkillLevel": "Beginner"
     },
     {
-      "id": 4,
-      "userSkillName": "Skill C",
-      "userSkillLevel": "Intermediate"
+      "userSkillName": "Python",
+      "userSkillLevel": "Pemula",
+      "id": 3
     }
   ],
   "profile": [
@@ -51,6 +68,15 @@
       "email": "rinonew@gmail.com",
       "username": "riyaraa new",
       "id": 2
+    },
+    {
+      "id": 3,
+      "username": "Jun",
+      "name": "Test Jun",
+      "address": "localhost",
+      "password": "123",
+      "bod": "2022-06-08",
+      "email": "test@gmail.com"
     }
   ]
 }
